@@ -26,6 +26,9 @@
 -HALAMAN ADMIN MENU
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/adminMenu.png?raw=true)
 
+-HALAMAN TAMBAH MENU
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/tambahMenu.png?raw=true)
+
 -HALAMAN REKAP
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/rekap.png?raw=true)
 
