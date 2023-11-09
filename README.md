@@ -1,3 +1,6 @@
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/home.png?raw=true)
+
+
 # Angular9
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.15.
