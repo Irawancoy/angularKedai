@@ -1,6 +1,28 @@
 
 **SAMPEL HALAMAN CUSTOMER**
+
+-HALAMAN HOME
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/home.png?raw=true)
+
+-HALAMAN RUANGAN
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/ruangan.png?raw=true)
+
+-HALAMAN KERANJANG
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/keranjang.png?raw=true)
+
+
+**SAMPEL HALAMAN ADMIN**
+
+-HALAMAN DASHBOARD
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/dashboard.png?raw=true)
+
+-HALAMAN ADMIN MENU
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/adminMenu.png?raw=true)
+
+
+-HALAMAN REKAP
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/rekap.png?raw=true)
+
 
 
 # Angular9
