@@ -1,3 +1,5 @@
+
+**SAMPEL HALAMAN CUSTOMER**
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/home.png?raw=true)
 
 
