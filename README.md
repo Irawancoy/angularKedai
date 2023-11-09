@@ -14,6 +14,9 @@
 -HALAMAN KERANJANG
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/keranjang.png?raw=true)
 
+-HALAMAN TENTANG KAMI
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/tentangKami.png?raw=true)
+
 
 **SAMPEL HALAMAN ADMIN**
 
@@ -23,10 +26,14 @@
 -HALAMAN ADMIN MENU
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/adminMenu.png?raw=true)
 
-
 -HALAMAN REKAP
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/rekap.png?raw=true)
 
+-HALAMAN SETING ADMIN
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/settingAdmin.png?raw=true)
+
+-HALAMAN TRANSAKSI
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/transaksi.png?raw=true)
 
 
 # Angular9
