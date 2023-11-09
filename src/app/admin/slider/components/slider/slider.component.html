@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2">
+     <div class="row">
+          <div class="col-lg-12">
+               <div class="card shadow-lg">
+                    <div class="card-header d-flex justify-content-between">
+                         <h1>Daftar Slider</h1>
+                         <div role="group" class="btn-group btn-group-sm btn-group-justified blocks">
+                              <button type="button" class="btn btn-sm btn-primary mr-2"
+                                   (click)="createSlider(formSlider)">
+                                   <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Slider
+                              </button>
+                         </div>
+                    </div>
+                    <div class="card-body">
+                         <div class="table-responsive">
+                              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                   class="table table-hover">
+                                   <thead class="thead-light">
+                                        <tr>
+                                             <th scope="col">No</th>
+                                             <th scope="col" width="80">Gambar</th>
+                                             <th scope="col">Aksi</th>
+                                        </tr>
+                                   </thead>
+                                   <tbody>
+                                        <tr *ngFor="let val of listSlider; index as i;">
+                                             <th scope="row">{{i+1}}</th>
+                                             <td><img src="{{val.gambar}}" class="img-thumbnail"></td>
+
+                                             <td class="vertical-middle text-right">
+                                                  <a (click)="updateSlider(val,formSlider)"
+                                                       class="btn btn-sm btn-primary" placement="left" container="body"
+                                                       ngbTooltip="Edit">
+                                                       <i class="fa fa-edit font-size-14"></i> Edit
+                                                  </a>
+                                                  <a (click)="deleteSlider(val.id)" class="btn btn-sm btn-danger"
+                                                       placement="left" container="body" ngbTooltip="Hapus">
+                                                       <i class="fa fa-trash font-size-14"></i> Hapus
+                                                  </a>
+                                             </td>
+                                        </tr>
+                                   </tbody>
+                              </table>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>
+
+<ng-template #formSlider let-modal>
+     <div class="modal-header">
+          <h1 class="modal-title mt-0">{{ titleCard}}</h1>
+          <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+          </button>
+     </div>
+     <div class="modal-body">
+          <!-- <app-formmenu [menuId]="modelId" (afterSave)="modal.close();reload()"></app-formmenu> -->
+          <app-form-slider [sliderId]="modelId" (afterSave)="modal.close();reload()"></app-form-slider>
+     </div>
+</ng-template>

@@ -1,0 +1,48 @@
+<form>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-md-4 required">Nama</label>
+                <div class="col-md-8">
+                    <input [(ngModel)]="formModel.nama" name="nama" type="text" class="form-control"
+                        placeholder="Nama ">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4 required">Status</label>
+                <div class="col-md-8">
+                    <select [(ngModel)]="formModel.status" name="status" class="form-control">
+                        <option value="1">Ada</option>
+                        <option value="0">Habis</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4 required">Deskripsi</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" [(ngModel)]="formModel.deskripsi" name="deskripsi"
+                        placeholder="Tuliskan detail mengenai item / menu ini" rows="3"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <div class="col-md-12 text-right">
+                    <button type="button" class="btn btn-outline-secondary mr-2" (click)="back()">Daftar Item</button>
+                    <button type="button" class="btn btn-primary" (click)="save()">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

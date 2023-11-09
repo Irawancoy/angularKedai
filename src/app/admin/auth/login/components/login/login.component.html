@@ -1,0 +1,29 @@
+<div class="card" style="width: 18rem;">
+    <div class="shadow-lg card-header">
+        <h1 style="text-align: center;">Login Admin</h1>
+
+        <div class="d-flex justify-content-center">
+
+            <img src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                class="card-img-top" alt="..." style="width: 50%; height: auto;">
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" [(ngModel)]="email" class="form-control" id="email" name="email"
+                        aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-group ">
+                    <label for="password">Password</label>
+                    <input type="password" [(ngModel)]="password" class="form-control" id="password" name="password"
+                        placeholder="Password">
+                </div>
+                <br>
+
+                <button class="btn btn-primary" (click)="login()">Login</button>
+            </form>
+        </div>
+    </div>

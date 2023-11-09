@@ -1,0 +1,17 @@
+<div class="card mb-3">
+     <h2 class="text-center">{{ ruangan?.nama }}</h2>
+     <img src="{{ ruangan?.gambar }}" class="card-img-top img-fluid" alt="...">
+     <div class="card-body">
+          <p class="card-text">{{ ruangan?.deskripsi }}</p>
+          <p class="card-text">Harga sewa 1 jam:{{ ruangan?.harga1jam|currency:"Rp." }}</p>
+          <p class="card-text">Harga sewa 3 jam:{{ ruangan?.harga3jam|currency:"Rp." }}</p>
+          <!-- <p class="card-text bold">Prosedur Sewa<br>{{ ruangan?.prosedur }}</p> -->
+
+          <!-- <h3>Prosedur Sewa:</h3>
+          <li *ngFor="let procedure of prosedur">
+               <strong> {{ procedure.nomer }}:</strong> {{ procedure.deskripsi }}
+          </li> -->
+
+
+
+     </div>

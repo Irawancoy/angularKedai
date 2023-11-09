@@ -1,0 +1,68 @@
+<body>
+     <section class="vh-100" style="background-color: #161616; color: #fff;">
+          <div class="container-fluid h-custom">
+
+               <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                         <img src="http://localhost:8000/assets/img/LogoOPt.png" class="img-fluid mx-auto d-block mb-4"
+                              style="max-width: 100%; height: auto;">
+
+                    </div>
+                    <div class="col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-1">
+                         <form>
+                              <div class="divider d-flex align-items-center my-4">
+                                   <p class="text-center fw-bold mx-3 mb-0">Register Customer</p>
+                              </div>
+
+                              <div class="form-outline">
+                                   <input type="text" id="nama" name="nama" [(ngModel)]="nama"
+                                        class="form-control form-control-lg" placeholder="Enter your name"
+                                        style="background-color: #292929; color: #fff; border-color: #fff;" />
+                                   <label class="form-label" for="form3Example1" style="color: #fff;">Name</label>
+                              </div>
+
+                              <!-- Email input -->
+                              <div class="form-outline ">
+                                   <input type="email" id="email" name="email" [(ngModel)]="email"
+                                        class="form-control form-control-lg" placeholder="Enter a valid email address"
+                                        style="background-color: #292929; color: #fff; border-color: #fff;" />
+                                   <label class="form-label" for="form3Example3" style="color: #fff;">Email
+                                        address</label>
+                              </div>
+                              <div class="form-outline">
+                                   <input type="number" id="no_hp" name="no_hp" [(ngModel)]="no_hp"
+                                        class="form-control form-control-lg" placeholder="Enter your phone number"
+                                        style="background-color: #292929; color: #fff; border-color: #fff;" />
+                                   <label class="form-label" for="phone" style="color: #fff;">Phone</label>
+                              </div>
+
+                              <!-- Password input -->
+                              <div class="form-outline ">
+                                   <input type="password" id="password" name="password" [(ngModel)]="password"
+                                        class="form-control form-control-lg" placeholder="Enter password"
+                                        style="background-color: #292929; color: #fff; border-color: #fff;" />
+                                   <label class="form-label" for="form3Example4" style="color: #fff;">Password</label>
+                              </div>
+                              <div class="text-center text-md-start mt-4 pt-2">
+                                   <button type="button" class="btn btn-secondary btn-lg"
+                                        style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                                        (click)="register()">Register</button>
+
+                                   <p class="small fw-bold mt-2 pt-1 mb-0" style="color: #fff;">Already have an account?
+                                        <a class="link-danger" style="color: #2a9df4;"
+                                             [routerLink]="['/login']">Login</a>
+                                   </p>
+                              </div>
+                         </form>
+
+                    </div>
+               </div>
+          </div>
+     </section>
+     <footer class="text-dark py-3" style='background-color:#fff; position: fixed; bottom: 0; width: 100%;'>
+          <div class="container text-center">
+               <p class="mb-0">Copyright © 2023
+               </p>
+          </div>
+     </footer>
+</body>

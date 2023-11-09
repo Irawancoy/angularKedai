@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'JawaPalsu';
+    src: url('./JAWAPALSU.TTF') format('truetype')
+}
+
+.navbar-brand {
+    font-family: 'JawaPalsu';
+}

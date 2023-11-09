@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<header>
+     <div class="jumbotron jumbotron-fluid rounded-2">
+          <div class="container">
+               <!-- <h1 class="display-4">{{ selectedCategory }} Menu</h1> -->
+               <h1 class="font-italic border-bottom">Selamat datang di Ruangan Reservasi!</h1>
+               <p class="lead"><br>Tempat di mana Anda dapat dengan mudah menemukan dan memesan ruangan yang sesuai
+                    dengan kebutuhan Anda. mulai dari pertemuan bisnis hingga acara sosial. Dengan layanan kami, Anda
+                    tidak perlu repot mencari-cari lagi, karena kami menyediakan
+                    pengalaman reservasi yang mudah dan efisien.
+               </p>
+
+          </div>
+     </div>
+</header>
+
+<div class="card mb-3 mt-2">
+     <div class="row g-0" *ngFor="let ruangan of listRuangan">
+          <div class="col-md-4">
+               <img src="{{ ruangan.gambar }}" class="img-fluid rounded-start" alt="{{ ruangan.nama }}">
+          </div>
+          <div class="col-md-8">
+               <div class="card-body">
+                    <h2 class="card-title">{{ ruangan.nama }}</h2>
+                    <p class="card-text">{{ ruangan.deskripsi }}</p>
+
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                              (click)="showDetail(ruangan,detailRuangan)">Details</a>
+                    </div><br>
+                    <!-- <button class="btn btn-primary btn-sm" (click)="addItemToCart(ruangan)">Add to Cart</button> -->
+                    <!-- <button (click)="addToCart(ruangan)">Tambahkan ke Keranjang</button> -->
+                    <button (click)="addToCart(ruangan)" type="button" class="btn btn-primary">
+                         <span class="fa fa-shopping-cart"></span>
+                    </button>
+
+               </div>
+          </div>
+     </div>
+</div>
+
+<ng-template #detailRuangan let-modal>
+     <div class="modal-header">
+          <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+          </button>
+     </div>
+     <div class="modal-body">
+          <!-- <app-detail-menu [menuId]="modelId"></app-detail-menu> -->
+          <app-detail-ruangan [ruanganId]="modelId"></app-detail-ruangan>
+     </div>
+</ng-template>
+
+
+<ng-template #keranjangModal>
+     <div class="modal-header text-center ">
+          <!-- <h1>Keranjang</h1> -->
+          <span class="fa fa-shopping-cart "> Keranjang</span>
+          <button type=" button " class=" close " aria-label=" Close " (click)=" modal.close();reload() ">
+               <span aria-hidden=" true ">&times;</span>
+          </button>
+     </div>
+     <div class=" modal-body ">
+          <app-keranjang [listRuangan]=" items " (afterSave)=" modal.close() "></app-keranjang>
+     </div>
+     <!-- <div class=" modal-footer ">
+          <button type=" button " class=" btn btn-secondary " (click)=" modal.close();reload() ">Close</button>
+     </div> -->
+</ng-template>

@@ -1,0 +1,259 @@
+<app-navbar> </app-navbar>
+<div class="jumbotron jumbotron-fluid rounded-2 text-center">
+     <div class="container">
+          <!-- <h1 class="display-4">{{ selectedCategory }} Menu</h1> -->
+          <h1 class="font-italic border-bottom">Reservasi Anda</h1>
+
+     </div>
+</div>
+<!-- tampilan keranjnag kosong jika transaksiCustomer 0 -->
+<div class="container-sm" *ngIf="transaksiCustomer?.length==0">
+     <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">Reservasi Anda Kosong</h4>
+          <p>Silahkan pilih ruangan yang ingin disewa</p>
+          <hr>
+          <p class="mb-0">Klik tombol dibawah ini untuk melihat ruangan yang tersedia</p>
+          <button class="btn btn-primary" [routerLink]="['/ruangan']">Lihat Ruangan</button>
+     </div>
+</div>
+
+
+
+
+<div class="container-sm">
+     <ng-container *ngFor=" let tran of transaksiCustomer">
+          <mat-expansion-panel class="bg-light text-dark " (opened)="panelOpenState = true"
+               (closed)="panelOpenState = false">
+               <mat-expansion-panel-header class="text-dark ">
+                    <mat-panel-title class="text-dark ">
+                         <h3>{{ tran.detail_ruangan[0].nama }}</h3>
+
+
+                    </mat-panel-title>
+                    <mat-panel-description class="text-dark d-flex justify-content-between">
+                         <p>{{ tran.total|currency:"Rp." }}</p>
+                         <p>{{ tran.tanggal_sewa | date: 'dd-MM-yyyy' }}</p>
+
+                    </mat-panel-description>
+                    <div class="d-flex justify-content-end">
+                         <div *ngIf="tran.status_pembatalan === 0 ;">
+
+                              <em *ngIf="tran.status === 0 ;">Diproses</em>
+                              <em *ngIf="tran.status === 1;">Dikonfirmasi</em>
+                         </div>
+                         <em *ngIf="tran.status_pembatalan === 1;">Dibatalkan</em>
+                         <mat-icon>expand_more</mat-icon>
+                    </div>
+
+               </mat-expansion-panel-header>
+               <div *ngIf="tran.status_pembatalan===0">
+                    <div *ngIf="tran.status===1">
+                         <div *ngIf="tran.jenis_transaksi==='Cash'">
+                              <div>
+                                   <h3 class="text-success">
+
+                                        <strong>Pembayaran anda sebesar {{ tran.bayar|currency:"Rp." }} telah
+                                             diterima</strong>
+                                   </h3>
+                              </div>
+                         </div>
+                         <div *ngIf="tran.jenis_transaksi==='DP'">
+                              <div>
+                                   <h3 class="text-success">
+
+                                        <strong>Pembayaran DP anda sebesar {{ tran.bayar|currency:"Rp." }} telah
+                                             diterima</strong>
+
+                                   </h3>
+
+                              </div>
+                              <div>
+                                   <h4 class="text-success">
+                                        <strong>Pelunasan sebesar {{ tran.kurang_bayar|currency:"Rp." }} bisa dilakukan
+                                             di Omah Petoeng pada hari sewa</strong>
+                                   </h4>
+                              </div>
+                         </div>
+
+
+                    </div>
+                    <div *ngIf="tran.status===0">
+                         <div *ngIf="tran.jenis_transaksi==='Cash'">
+                              <h3 class="text-danger">
+
+                                   <strong>Segera lakukan pembayaran sebesar {{ tran.bayar|currency:"Rp." }} ke rekening
+                                        dibawah</strong>
+                              </h3>
+                              <div *ngFor=" let rek of rekening ">
+                                   <h3 class=" text-danger ">
+
+                                        <strong> {{
+                                             rek.nama_bank
+                                             }} {{
+                                             rek.nomor_rekening }} atas nama {{ rek.nama_pemilik }}</strong>
+                                   </h3>
+                              </div>
+
+                         </div>
+                         <div *ngIf="tran.jenis_transaksi==='DP'">
+                              <h3 class="text-danger">
+
+                                   <strong>Segera lakukan pembayaran sebesar DP {{ tran.bayar|currency:"Rp." }} ke
+                                        rekening
+                                        dibawah</strong>
+                              </h3>
+                              <div *ngFor=" let rek of rekening ">
+                                   <h3 class=" text-danger ">
+
+                                        <strong> {{
+                                             rek.nama_bank
+                                             }} {{
+                                             rek.nomor_rekening }} atas nama {{ rek.nama_pemilik }}</strong>
+                                   </h3>
+                              </div>
+
+                         </div>
+
+                    </div>
+               </div>
+               <p>Nama Customer : {{ tran.nama_customer }}</p>
+               <p>Email Customer : {{ tran.email_customer }}</p>
+               <p>No Hp : {{ tran.telp_customer }}</p>
+               <p *ngIf=" tran.telp_customer2!=tran.telp_customer ">No Hp 2 : {{ tran.telp_customer2 }}</p>
+               <p>Waktu Sewa : {{ tran.harga_ruang ===200000 ?'3 jam':'1 jam' }} ({{ tran.jam_mulai }}-{{
+                    tran.jam_selesai }})
+               </p>
+               <p>Harga Sewa : {{ tran.harga_ruang }}</p>
+               <P>Tamu : {{ tran.tamu }}</P>
+               <!-- daftar menu -->
+               <p>Daftar Menu : </p>
+               <table class=" table table-sm ">
+                    <thead>
+                         <tr>
+                              <th>Nama</th>
+                              <th>Harga</th>
+                              <th>Jumlah</th>
+                              <th>Total</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor=" let menu of tran.detail_menu ">
+                              <td>{{ menu.nama }}</td>
+                              <td>{{ menu.harga |currency:" Rp. "}}</td>
+                              <td>{{ menu.jumlah }}</td>
+                              <td>{{ menu.harga * menu.jumlah|currency:" Rp. " }}</td>
+                         </tr>
+                    </tbody>
+               </table>
+               <!-- pembatalan -->
+
+               <button class=" btn btn-sm btn-outline-danger mx-2 " *ngIf=" tran.status_pembatalan===0 "
+                    (click)=" createPembatalan(tran,pembatalanTransaksi) ">Pembatalan</button>
+
+               <p class=" text-danger mx-2 " *ngIf=" tran.status_pembatalan===1 ">Pembatalan Disetujui</p>
+
+               <!-- expand form button -->
+
+               <button class=" btn btn-sm btn-outline-primary " (click)=" expandInvoice() ">Invoice</button>
+
+               <div class="container mt-2" *ngIf="invoice === true">
+                    <div class="row col-lg-12 d-flex justify-content-center">
+                         <!-- <div class="col-lg-10 border border-dark" id="contentToConvert"> -->
+                         <div class="col-lg-10 border border-dark" [id]="tran.id_transaksi">
+                              <h1 class=" text-center mt-5 ">Omah Petoeng</h1>
+                              <h5 class=" text-center ">Invoice</h5>
+                              <hr>
+                              <div class=" row ">
+                                   <div class=" col-md-6 ">
+                                        <p><strong>No. Transaksi:</strong> {{ tran.id_transaksi }}</p>
+                                        <p><strong>No. Struk:</strong> {{tran.no_struk }}</p>
+                                        <p><strong>Tanggal Sewa:</strong> {{ tran.tanggal_sewa }}</p>
+                                        <p><strong>Jam Mulai:</strong> {{ tran.jam_mulai }}</p>
+                                        <p><strong>Jam Selesai:</strong> {{ tran.jam_selesai }}</p>
+                                        <p><strong>Jenis Transaksi:</strong> {{ tran.jenis_transaksi }}</p>
+                                   </div>
+                                   <div class=" col-md-6 ">
+                                        <p><strong>Nama Customer:</strong> {{ tran.nama_customer }}</p>
+                                        <p><strong>Telepon Customer:</strong> {{ tran.telp_customer }}</p>
+                                        <p *ngIf=" tran.telp_customer2 !=tran.telp_customer "><strong>Telepon Customer
+                                                  2:</strong> {{ tran.telp_customer }}</p>
+                                        <p><strong>Email Customer:</strong> {{ tran.email_customer }}</p>
+                                        <p><strong>Tamu:</strong> {{ tran.tamu }}</p>
+
+                                        <p *ngIf=" tran.status_pembatalan!=1 "><strong>Status Transaksi:</strong> {{
+                                             tran.status===0?'Diproses':'Dikonfirmasi' }}
+                                        </p>
+                                        <p *ngIf=" tran.status_pembatalan===1 "><strong>Status Pembatalan:</strong> {{
+                                             tran.status_pembatalan===1?'Dibatalkan':'Diproses' }}</p>
+                                   </div>
+                              </div>
+                              <hr>
+                              <h5>Detail Ruangan:</h5>
+                              <div class=" table-responsive ">
+                                   <table class=" table table-bordered ">
+                                        <thead>
+                                             <tr>
+                                                  <th>Nama</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr>
+                                                  <td>{{ tran.detail_ruangan[0].nama }}</td>
+                                             </tr>
+                                        </tbody>
+                                   </table>
+                              </div>
+                              <h5>Detail Menu:</h5>
+                              <div class=" table-responsive ">
+                                   <table class=" table table-bordered ">
+                                        <thead>
+                                             <tr>
+                                                  <th>Nama</th>
+                                                  <th>Harga</th>
+                                                  <th>Jumlah</th>
+                                                  <th>Total</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr *ngFor=" let menu of tran.detail_menu ">
+                                                  <td>{{ menu.nama }}</td>
+                                                  <td>{{ menu.harga |currency:" Rp. "}}</td>
+                                                  <td>{{ menu.jumlah }}</td>
+                                                  <td>{{ menu.harga * menu.jumlah|currency:" Rp. " }}</td>
+                                             </tr>
+                                        </tbody>
+                                   </table>
+                              </div>
+                              <div class=" text-right ">
+                                   <p><strong>Total Keseluruhan :</strong>{{ tran.total|currency:" Rp. " }}</p>
+                              </div>
+                         </div>
+                    </div>
+                    <div class=" text-center mt-3 ">
+                         <button class=" btn btn-sm btn-outline-dark mx-2 " (click)=" expandInvoice() ">Tutup</button>
+                         <button class=" btn btn-sm btn-outline-primary mx-2 "
+                              (click)=" exportAsPDF(tran.id_transaksi) ">Unduh</button>
+                    </div>
+
+               </div>
+
+          </mat-expansion-panel>
+     </ng-container>
+</div>
+
+
+
+
+<ng-template #pembatalanTransaksi let-modal>
+     <div class=" modal-header ">
+          <!-- <h1>Keranjang</h1> -->
+          <span>Pengajuan Pembatalan</span>
+          <button type=" button " class=" close " aria-label=" Close " (click)=" modal.close(); ">
+               <span aria-hidden=" true ">&times;</span>
+          </button>
+     </div>
+     <div class=" modal-body ">
+          <app-pembatalan [transaksiId]=" transaksiId " (afterSave)=" modal.close() "></app-pembatalan>
+     </div>
+
+</ng-template>

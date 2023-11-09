@@ -1,0 +1,126 @@
+<app-navbar> </app-navbar>
+<header class="">
+     <!-- <div class="container px-4 px-lg-5 my-5">
+          <div class="text-center text-white">
+               <h1 class="display-4 fw-bolder">Menu</h1>
+               <p class="lead fw-normal text-white-50 mb-0">{{ selectedCategory }}</p>
+          </div>
+     </div> -->
+
+     <div class="jumbotron jumbotron-fluid rounded-2">
+          <div class="container">
+               <!-- <h1 class="display-4">{{ selectedCategory }} Menu</h1> -->
+               <h1 class="font-italic border-bottom">Menu Yang Memikat, Segar, dan Lezat!</h1>
+               <p class="lead"><br>Nikmati kelezatan dan keanekaragaman menu kami yang tak tertandingi. Dari hidangan
+                    makanan yang lezat, minuman segar, hingga camilan menggoda, kami memiliki semua yang Anda butuhkan
+                    untuk memuaskan selera Anda.
+          </div>
+     </div>
+
+</header>
+<!-- Section-->
+<div class="">
+
+     <div class="btn-group mt-2 d-flex justify-content-center " role="group">
+          <button type="button" (click)="selectedCategory = 'Semua'">Semua</button>
+          <button type="button" (click)="selectedCategory = 'makanan'">Makanan</button>
+          <button type="button" (click)="selectedCategory = 'minuman'">Minuman</button>
+     </div>
+</div>
+
+<div class="container px-4 px-lg-5 mt-5">
+     <ng-container *ngIf="selectedCategory === 'Semua'">
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
+               <div class="col mb-5" *ngFor="let menu of listMenu">
+                    <div class="card h-100">
+                         <!-- Product image-->
+                         <img class="card-img-top" src="{{menu.gambar}}" alt="{{menu.nama}}" />
+                         <!-- Product details-->
+                         <div class="card-body p-4">
+                              <div class="text-center">
+                                   <!-- Product name-->
+                                   <h5 class="fw-bolder">{{menu.nama}}</h5>
+                                   <!-- Product price-->
+                                   <p>{{ menu.deskripsi | slice:0:70 }}{{ menu.deskripsi.length > 70 ? '.....' : '' }}
+                                   </p>
+
+                                   <!-- Rp.{{menu.harga}} -->
+                              </div>
+                         </div>
+                         <!-- Product actions-->
+                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                              <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                        (click)="showDetail(menu,detailMenu)">Details</a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </ng-container>
+
+     <ng-container *ngIf="selectedCategory === 'makanan'">
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
+               <div class="col mb-5" *ngFor="let makanan of menuMakanan">
+                    <div class="card h-100">
+                         <!-- Product image-->
+                         <img class="card-img-top" src="{{makanan.gambar}}" alt="{{makanan.nama}}" />
+                         <!-- Product details-->
+                         <div class="card-body p-4">
+                              <div class="text-center">
+                                   <!-- Product name-->
+                                   <h5 class="fw-bolder">{{makanan.nama}}</h5>
+                                   <!-- Product price-->
+                                   <p>{{ makanan.deskripsi | slice:0:70 }}{{ makanan.deskripsi.length > 70 ? '.....' :
+                                        '' }}
+                              </div>
+                         </div>
+                         <!-- Product actions-->
+                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                              <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                        (click)="showDetail(makanan,detailMenu)">Details</a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </ng-container>
+
+     <ng-container *ngIf="selectedCategory === 'minuman'">
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
+               <div class="col mb-5" *ngFor="let minuman of menuMinuman">
+                    <div class="card h-100">
+                         <!-- Product image-->
+                         <img class="card-img-top" src="{{minuman.gambar}}" alt="{{minuman.nama}}" />
+                         <!-- Product details-->
+                         <div class="card-body p-4">
+                              <div class="text-center">
+                                   <!-- Product name-->
+                                   <h5 class="fw-bolder">{{minuman.nama}}</h5>
+                                   <!-- Product price-->
+                                   <p>{{ minuman.deskripsi | slice:0:70 }}{{ minuman.deskripsi.length > 70 ? '.....' :
+                                        '' }}
+                              </div>
+                         </div>
+                         <!-- Product actions-->
+                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                              <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                        (click)="showDetail(minuman,detailMenu)">Details</a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </ng-container>
+
+
+     <ng-template #detailMenu let-modal>
+          <div class="modal-header">
+               <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+               </button>
+          </div>
+          <div class="modal-body">
+               <app-detail-menu [menuId]="modelId"></app-detail-menu>
+               <!-- <app-formlayanan [layananId]="modelId" (afterSave)="modal.close();reload(   )"></app-formlayanan> -->
+          </div>
+     </ng-template>

@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2 " *ngIf="!isOpenForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h1>
+                        Daftar Kategori
+                    </h1>
+
+                    <div role="group" class="btn-group btn-group-sm btn-group-justified blocks">
+
+                        <button type="button" class="btn btn-sm btn-primary mr-2" (click)="createKategori()">
+                            <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Menu
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <td>No</td>
+
+
+                                <td>Nama</td>
+                                <td>status</td>
+
+                                <td>Deskripsi</td>
+                                <td width="90"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let val of listKategori; index as i; ">
+                                <td>{{i+1}}</td>
+
+                                <td class="vertical-middle">{{val.nama}}</td>
+                                <td class="vertical-middle">
+                                    {{ val.status == 1 ? 'Tersedia' : 'Tidak Tersedia' }}
+
+                                </td>
+
+                                <td class="vertical-middle">{{val.deskripsi}} </td>
+                                <td class="vertical-middle text-right">
+                                    <a (click)="updateKategori(val)" class="btn btn-sm btn-primary" placement="left"
+                                        container="body" ngbTooltip="Edit">
+                                        <i class="fa fa-edit font-size-14"></i> Edit
+                                    </a>
+                                    <a (click)="deleteKategori(val.id)" class="btn btn-sm btn-danger" placement="left"
+                                        container="body" ngbTooltip="Hapus">
+                                        <i class="fa fa-trash font-size-14"></i> Hapus
+                                    </a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" *ngIf="isOpenForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h1>
+                        {{titleCard}}
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <div class="card-body">
+                        <app-form-kategori [kategoriId]="modelId"
+                            (afterSave)="showForm(false); getKategori()"></app-form-kategori>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

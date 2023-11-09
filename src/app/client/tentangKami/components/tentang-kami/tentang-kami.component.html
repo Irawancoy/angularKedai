@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<div class="jumbotron jumbotron-fluid rounded-2 text-center">
+     <div class="container">
+          <div class="row">
+               <div class="col-md-12">
+                    <h1 class="font-italic border-bottom">{{ dataTentangKami?.judul }}</h1>
+
+                    <hr>
+               </div>
+          </div>
+     </div>
+     <!-- </div> -->
+
+</div>
+<div class="container">
+     <div class="row">
+          <div class="col-md-12 text-center">
+               <p>
+                    {{ dataTentangKami?.deskripsi }}
+               </p>
+
+               <img src="{{ dataTentangKami?.gambar }}" width="200" height="200"
+                    style="border: 1px solid #ccc; border-radius: 70%;">
+
+               <p class="mt-2">{{ dataTentangKami?.alamat }}</p>
+               <p>{{ dataTentangKami?.no_hp }}</p>
+          </div>
+     </div>
+</div>

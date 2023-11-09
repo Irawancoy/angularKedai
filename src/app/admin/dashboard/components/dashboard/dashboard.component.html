@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2">
+     <h1 class="text-center">Dashboard Data Transaksi</h1>
+     <div class="row justify-content-center ">
+          <div class="row">
+               <div class="col-3">
+                    <div class="card shadow-lg mb-3">
+                         <div class="card-header">
+                              <h4 class="card-title text-center"> Hari Ini dan Kemarin</h4>
+
+                         </div>
+
+                         <div class="card-body ">
+                              <canvas baseChart [data]="todayYesterdayData" [labels]="todayYesterdayLabels"
+                                   [chartType]="chartType" [colors]="chartColors" [options]="chartOptions"></canvas>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-3">
+                    <div class="card shadow-lg mb-3">
+                         <div class="card-header">
+                              <h4 class="card-title text-center"> Bulan Ini dan Bulan Lalu</h4>
+                         </div>
+                         <div class="card-body">
+                              <canvas baseChart [data]="thisLastMonthData" [labels]="thisLastMonthLabels"
+                                   [chartType]="chartType" [colors]="chartColors" [options]="chartOptions"></canvas>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-3">
+                    <div class="card shadow-lg mb-3">
+                         <div class="card-header">
+                              <h4 class="card-title text-center"> Tahun Ini dan Tahun Lalu</h4>
+                         </div>
+                         <div class="card-body">
+                              <canvas baseChart [data]="thisLastYearData" [labels]="thisLastYearLabels"
+                                   [chartType]="chartType" [colors]="chartColors" [options]="chartOptions"></canvas>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-3">
+                    <div class="card shadow-lg mb-3">
+                         <div class="card-header">
+                              <h4 class="card-title text-center">Jenis Transaksi</h4>
+                         </div>
+                         <div class="card-body">
+                              <canvas baseChart [data]="thisJenisData" [labels]="thisJenisLabels"
+                                   [chartType]="chartType" [colors]="chartColors" [options]="chartOptions"></canvas>
+                         </div>
+                    </div>
+               </div>
+
+
+          </div>
+     </div>
+     <div class="col mb-1">
+          <div class="card shadow-lg ">
+               <div class="card-header">
+                    <h4 class="card-title text-center "> 2023</h4>
+               </div>
+
+               <div style="height: 250px;">
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                         [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColors">
+                    </canvas>
+               </div>
+          </div>
+     </div>
+</div>

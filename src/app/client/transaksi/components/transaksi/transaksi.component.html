@@ -1,0 +1,203 @@
+<body class="bg-light">
+     <div class="container">
+
+          <div class="row">
+               <div class="col-md-7 order-md-4 mb-4">
+
+                    <ul class="list-group mb-3">
+                         <mat-expansion-panel class="mb-2">
+                              <mat-expansion-panel-header>
+                                   <mat-panel-title>
+                                        <span style="color:#212529;">Prosedur Sewa</span>
+
+                                   </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <ng-container *ngFor="let pros of prosedur">
+                                   <div style="color: #212529;">
+                                        <p>{{ pros.nomer }}.{{ pros.deskripsi }}</p>
+
+                                   </div>
+
+                              </ng-container>
+                         </mat-expansion-panel>
+                         <li class="list-group-item d-flex justify-content-between lh-condensed">
+                              <div>
+                                   <h4 class="my-0">Tanggal Sewa</h4>
+                                   <small class="text-muted">{{ formModel?.tanggal_sewa }}</small>
+                              </div>
+
+                         </li>
+                         <li class="list-group-item d-flex justify-content-between lh-condensed">
+                              <div>
+                                   <h4 class="my-0">Jam Sewa</h4>
+                                   <small class="text-muted">{{ formModel?.jam_mulai}}-{{ formModel?.jam_selesai
+                                        }}</small>
+                              </div>
+
+                         </li>
+                         <li class="list-group-item d-flex justify-content-between lh-condensed">
+                              <div>
+                                   <h4 class="my-0">Tamu</h4>
+                                   <small class="text-muted">{{ formModel?.tamu}}</small>
+                              </div>
+
+                         </li>
+
+
+                         <li class="list-group-item d-flex justify-content-between lh-condensed">
+                              <div>
+                                   <h4 class="my-0">Ruangan</h4>
+                                   <small class="text-muted">{{ formModel?.detail_ruangan[0]?.nama }}</small>
+                              </div>
+                              <span>{{ formModel.harga_ruang|currency:"Rp." }}</span>
+                         </li>
+                         <mat-expansion-panel hideToggle>
+                              <mat-expansion-panel-header>
+                                   <mat-panel-title>
+                                        <span style="color:#212529;">Menu</span>
+
+                                   </mat-panel-title>
+
+                                   <p>{{ totalHargaMenu()|currency:'Rp.' }}</p>
+                              </mat-expansion-panel-header>
+
+                              <ng-container *ngFor="let menu of formModel.detail_menu let i = index">
+                                   <div class="menu-item">
+                                        <div class="menu-name text-muted">{{ menu.nama }} - {{ menu.harga | currency:
+                                             'Rp.' }}
+                                        </div>
+                                        <div class="menu-actions">
+                                             <button mat-icon-button (click)="increaseQuantity(i)">
+                                                  <mat-icon>add</mat-icon>
+                                             </button>
+                                             <span>{{ menu.jumlah }}</span>
+                                             <button mat-icon-button (click)="decreaseQuantity(i)">
+                                                  <mat-icon>remove</mat-icon>
+                                             </button>
+                                             <button mat-icon-button (click)="removeMenu(i)">
+                                                  <mat-icon>delete</mat-icon>
+                                             </button>
+                                        </div>
+                                   </div>
+                              </ng-container>
+                         </mat-expansion-panel>
+
+                         <li class="list-group-item d-flex justify-content-between">
+                              <span>Total </span>
+                              <p *ngIf="formModel.jenis_transaksi!='DP'">{{ totalKeseluruhan()|currency:'Rp.'}}</p>
+                              <div *ngIf="formModel.jenis_transaksi==='DP'" class="text-right">
+                                   <p>{{ totalKeseluruhan() |currency:'Rp.'}}</p>
+                                   <p>DP(30%) {{ totalKeseluruhan()*0.3 |currency:'Rp.'}}</p>
+                              </div>
+                         </li>
+
+
+
+                    </ul>
+                    <div class="btn-group d-flex justify-content-end">
+                         <button type="button" class="btn btn-sm btn-primary " (click)="openMoreForm()">Edit
+                              Pesanan</button>
+
+                         <button type="button" class="btn btn-sm btn-danger " (click)="createTransaksi()">Pesan</button>
+                    </div>
+
+
+               </div>
+               <div class="col-md-5 order-md-1">
+                    <form>
+
+                         <div class="mb-3">
+                              <label for="jenistransaksi">Jenis Transaksi <span
+                                        class="text-muted">(DP/CASH)</span></label>
+                              <select class="custom-select d-block w-100" id="jenistransaksi" required
+                                   [(ngModel)]="formModel.jenis_transaksi" name="jenistransaksi">
+                                   <option value="DP">DP</option>
+                                   <option value="Cash">Cash</option>
+                              </select>
+                         </div>
+
+                         <div class="mb-3" *ngIf="formModel?.jenis_transaksi === 'DP'">
+                              <label for="fotoidentitas">Foto Identitas <span class="text-muted">(KTP)</span></label>
+                              <br>
+
+                              <img *ngIf="imgSrc" [src]="imgSrc || formModel.foto_ktp" class="img-thumbnail" width="150"
+                                   height="150">
+                              <input *ngIf="!formModel.foto_ktp" type="file" (change)="onFileChange($event)"
+                                   class="form-control" id="fotoidentitas" placeholder="Foto Identitas" name="gambar">
+                         </div>
+
+                         <div class="mb-3">
+                              <label for="catatan">Catatan<span class="text-muted">(Optional)</span></label>
+                              <textarea class="form-control" id="catatan" placeholder="Catatan" name="catatan"
+                                   [(ngModel)]="formModel.catatan" required></textarea>
+                         </div>
+                         <div class="mb-3">
+                              <label for="nohp">Nomor Hp</label>
+                              <input type="text" class="form-control" id="nohp" placeholder="Nomor Hp" name="nohp"
+                                   [(ngModel)]="formModel.no_hp" required>
+                         </div>
+
+                         <div *ngIf="openMore==true">
+                              <div class="mb-3">
+                                   <h5>Pilih Jam Sewa:</h5>
+                                   <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="form-check-input" name="harga1jam" id="harga1jam"
+                                             [value]="ruangan.harga1jam" [(ngModel)]="selectedPrice"
+                                             (change)="updateJamSelesai()">
+                                        <label class="form-check-label" for="harga1jam">1 Jam</label>
+                                   </div>
+
+                                   <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="form-check-input" name="harga3jam" id="harga3jam"
+                                             [value]="ruangan.harga3jam" [(ngModel)]="selectedPrice"
+                                             (change)="updateJamSelesai()">
+                                        <label class="form-check-label" for="harga3jam">3 Jam</label>
+                                   </div>
+                              </div>
+                              <div class="mb-3">
+                                   <label for="selectedMenu">Pilih Menu</label>
+                                   <select class="form-control" [(ngModel)]="selectedMenu" name="selectedMenu"
+                                        id="selectedMenu" (change)="addMenuToTable()">
+
+                                        <option value="" disabled selected>Pilih Menu</option>
+                                        <option *ngFor="let menu of menuTersedia" [ngValue]="menu">
+                                             {{ menu.nama }} - {{ menu.harga | currency: 'Rp.' }}
+                                        </option>
+                                   </select>
+                              </div>
+                              <div class="mb-3">
+                                   <label for="tanggalsewa">Tanggal Sewa</label>
+                                   <input type="date" class="form-control" id="tanggalsewa" placeholder="Tanggal Sewa"
+                                        name="tanggalsewa" [(ngModel)]="formModel.tanggal_sewa" [min]="minDate"
+                                        required>
+                              </div>
+
+                              <div class="mb-3">
+                                   <label for="jammulai">Jam Mulai</label>
+                                   <input type="time" class="form-control" id="jammulai" placeholder="Jam Mulai"
+                                        name="jammulai" [(ngModel)]="formModel.jam_mulai"
+                                        (ngModelChange)="updateJamSelesai()" required>
+                              </div>
+                              <div class="mb-3">
+                                   <label for="jamselesai">Jam Selesai</label>
+                                   <input type="time" class="form-control" id="jamselesai" placeholder="Jam Selesai"
+                                        name="jamselesai" [(ngModel)]="formModel.jam_selesai" required readonly>
+                              </div>
+
+                              <div class="mb-3">
+                                   <label for="tamu">Tamu</label>
+                                   <input type="number" class="form-control" id="tamu" placeholder="Tamu" name="tamu"
+                                        [(ngModel)]="formModel.tamu" required>
+
+                              </div>
+                         </div>
+
+                    </form>
+
+
+
+               </div>
+
+
+
+          </div>

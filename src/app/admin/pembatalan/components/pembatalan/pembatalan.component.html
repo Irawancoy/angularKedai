@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2">
+     <div class="row">
+          <div class="col-lg-12">
+               <div class="card shadow-lg">
+                    <div class="card-header d-flex justify-content-between">
+                         <h1>Daftar Pembatalan</h1>
+                         <div role="group" class="btn-group btn-group-sm btn-group-justified blocks">
+                              <!-- <button type="button" class="btn btn-sm btn-primary mr-2" (click)="createMenu(formMenu)">
+                             <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Menu
+                         </button> -->
+                         </div>
+                    </div>
+                    <div class="card-body">
+                         <div class="table-responsive">
+                              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                   class="table table-hover">
+                                   <thead class="thead-light">
+                                        <tr>
+                                             <th scope="col">No</th>
+                                             <th scope="col">no struk</th>
+                                             <th scope="col">Nama Customer</th>
+                                             <th scope="col">No Hp</th>
+                                             <th scope="col">Email</th>
+                                             <th scope="col">Tanggal Sewa</th>
+                                             <th scope="col">Jam Sewa</th>
+                                             <th scope="col">Jenis Transaksi</th>
+                                             <th scope="col">Alasan</th>
+                                             <th scope="col">Status</th>
+
+
+                                             <th scope="col">Aksi</th>
+
+                                        </tr>
+                                   </thead>
+                                   <tbody>
+                                        <tr *ngFor="let val of dataPembatalan; index as i;">
+                                             <th scope="row">{{i+1}}</th>
+                                             <td class="vertical-middle">{{val.transaksi.no_struk}}</td>
+                                             <td class="vertical-middle">{{ val.transaksi.nama_customer }}</td>
+                                             <td class="vertical-middle">{{ val.transaksi.telp_customer }}<br><span
+                                                       *ngIf="val.transaksi.telp_customer!=val.transaksi.telp_customer2">{{
+                                                       val.transaksi.telp_customer2 }}</span></td>
+                                             <td class="vertical-middle">{{ val.transaksi.email_customer}}</td>
+                                             <td class="vertical-middle">{{val.transaksi.tanggal_sewa}}</td>
+                                             <td class="vertical-middle">{{val.transaksi.jam_mulai}} -
+                                                  {{val.transaksi.jam_selesai}}
+                                             </td>
+                                             <td class="vertical-middle">{{val.transaksi.jenis_transaksi}}</td>
+                                             <td class="vertical-middle">{{val.keterangan}}</td>
+
+
+                                             <td class="vertical-middle">
+                                                  <mat-slide-toggle [checked]="val.status === 1"
+                                                       [color]="val.status === 1 ? 'primary' : 'warn'"
+                                                       (change)="editPembatalanStatus(val.id, $event.checked ? 1 : 0)">
+                                                  </mat-slide-toggle>
+                                                  <div class="toggle-text" *ngIf="val.status === 1; else elseBlock">
+                                                       Batalkan konfirmasi?</div>
+                                                  <ng-template #elseBlock>
+                                                       <div class="toggle-text">Konfirmasi?</div>
+                                                  </ng-template>
+                                             </td>
+                                             <td class="vertical-middle text-right">
+
+                                                  <a (click)="deletePembatalan(val.id)" class="btn btn-sm btn-danger"
+                                                       placement="left" container="body" ngbTooltip="Hapus">
+                                                       <i class="fa fa-trash font-size-14"></i> Hapus
+                                                  </a>
+                                             </td>
+                                        </tr>
+                                   </tbody>
+                              </table>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>

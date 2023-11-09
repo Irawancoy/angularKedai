@@ -1,0 +1,25 @@
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-name {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.menu-actions {
+    display: flex;
+    align-items: center;
+}
+
+.mat-expansion-panel {
+    background-color: #fff;
+}
+
+.mat-expansion-panel-header,
+.menu-item {
+    background-color: #fff;
+    color: #212529
+}

@@ -1,0 +1,216 @@
+<app-navbar></app-navbar>
+<div class="jumbotron jumbotron-fluid rounded-2 text-center">
+     <div class="container">
+          <h1>
+
+               <i class="fas fa-shopping-cart"></i> Keranjang Saya
+          </h1>
+     </div>
+</div>
+<!-- tampilan keranjnag kosong jika listKeranjang 0 -->
+<div class="container-sm" *ngIf="listKeranjang?.length==0">
+     <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">Keranjang Kosong</h4>
+          <p>Silahkan pilih ruangan yang ingin disewa</p>
+          <hr>
+          <p class="mb-0">Klik tombol dibawah ini untuk melihat ruangan yang tersedia</p>
+          <button class="btn btn-primary" [routerLink]="['/ruangan']">Lihat Ruangan</button>
+     </div>
+</div>
+<div class="container-sm ">
+
+     <ng-container *ngFor="let tran of listKeranjang">
+          <mat-expansion-panel class="bg-light text-dark border-bottom " (opened)="panelOpenState = true"
+               (closed)="panelOpenState = false">
+               <mat-expansion-panel-header class="text-dark">
+                    <mat-panel-title class="text-dark ">
+                         <h3>{{ tran.detail_ruangan[0].nama }}</h3>
+
+                    </mat-panel-title>
+                    <mat-panel-description class="text-dark  d-flex justify-content-between">
+
+                         <p>{{ tran.tanggal_sewa | date: 'dd-MM-yyyy' }}</p>
+
+                         <p>{{ tran.total|currency:"Rp." }}</p>
+
+                    </mat-panel-description>
+                    <div class="d-flex justify-content-end">
+
+                         <mat-icon>expand_more</mat-icon>
+                    </div>
+
+
+               </mat-expansion-panel-header>
+
+               <p *ngIf="tran.telp_customer2!=tran.telp_customer">No Hp 2 : {{ tran.telp_customer2 }}</p>
+               <p>Waktu Sewa : {{ tran.harga_ruang ===200000 ?'3 jam':'1 jam' }} ({{ tran.jam_mulai }}-{{
+                    tran.jam_selesai }})
+               </p>
+               <p>Harga Sewa : {{ tran.harga_ruang }}</p>
+               <P>Tamu : {{ tran.tamu }}</P>
+               <!-- daftar menu -->
+               <p>Daftar Menu : </p>
+               <table class="table table-sm border-bottom">
+                    <thead>
+                         <tr>
+                              <th>Nama</th>
+                              <th>Harga</th>
+                              <th>Jumlah</th>
+                              <th>Total</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr *ngFor="let menu of tran.detail_menu">
+                              <td>{{ menu.nama }}</td>
+                              <td>{{ menu.harga |currency:"Rp."}}</td>
+                              <td>{{ menu.jumlah }}</td>
+                              <td>{{ menu.harga * menu.jumlah|currency:"Rp." }}</td>
+                         </tr>
+                    </tbody>
+               </table>
+               <!-- pembatalan -->
+               <div class="d-flex justify-content-end">
+                    <button class="btn btn-sm btn-danger mx-2" (click)="deleteKeranjang(tran.id_keranjang)">
+                         <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="btn btn-sm btn-success mx-2" (click)="createTransaksi(tran, formTransaksi)">
+                         Pesan
+                    </button>
+               </div>
+          </mat-expansion-panel>
+     </ng-container>
+</div>
+
+
+
+
+<ng-template #detailRuangan let-modal>
+     <div class="modal-header">
+          <h5 class="modal-title">Detail Ruang</h5>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+               <span aria-hidden="true">&times;</span>
+          </button>
+     </div>
+     <div class="modal-body">
+          <table class="table table-bordered text-center">
+               <thead>
+                    <tr>
+                         <th>Nama Ruang</th>
+                         <th>Jam Sewa</th>
+                         <th>Tamu</th>
+                         <th>Harga</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr>
+                         <td>{{ modalData.detail_ruangan[0].nama }}</td>
+                         <td>{{ modalData.harga_ruang === 200000 ? '3 jam' : '1 jam' }}</td>
+                         <td>{{ modalData.tamu }}</td>
+                         <td>{{ modalData.harga_ruang | currency: 'Rp.' }}</td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
+     <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Tutup</button>
+     </div>
+</ng-template>
+
+<ng-template #detailMenu let-modal>
+     <div class="modal-header">
+          <h5 class="modal-title">Detail Menu</h5>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+               <span aria-hidden="true">&times;</span>
+          </button>
+     </div>
+     <div class="modal-body">
+          <table class="table table-bordered text-center">
+               <thead>
+                    <tr>
+                         <th>No</th>
+                         <th>Nama Menu</th>
+                         <th>Harga</th>
+                         <th>Jumlah</th>
+                         <th>Total Harga</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr *ngFor="let menu of modalData.detail_menu;index as i">
+                         <td>{{ i + 1 }}</td>
+                         <td>{{ menu.nama }}</td>
+                         <td>{{ menu.harga | currency: 'Rp.' }}</td>
+                         <td>{{ menu.jumlah }}</td>
+                         <td>{{ menu.harga * menu.jumlah | currency: 'Rp.' }}</td>
+                    </tr>
+                    <tr>
+                         <td colspan="4"></td>
+                         <td>{{ calculateTotal() | currency: 'Rp.' }}</td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
+     <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Tutup</button>
+     </div>
+</ng-template>
+
+
+<ng-template #detailHarga let-modal>
+     <div class="modal-header">
+          <h5 class="modal-title">Detail Harga</h5>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+               <span aria-hidden="true">&times;</span>
+          </button>
+     </div>
+     <div class="modal-body">
+          <table class="table table-bordered text-center">
+
+               <thead>
+                    <tr>
+                         <th>Harga Sewa</th>
+                         <th>Harga Total Menu</th>
+                         <th>Harga Total</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr>
+                         <td>{{ modalData.harga_ruang | currency: 'Rp.' }}</td>
+                         <td>{{ calculateTotal() | currency: 'Rp.' }}</td>
+                         <td>{{ modalData.harga_ruang + calculateTotal() | currency: 'Rp.' }}</td>
+                    </tr>
+
+               </tbody>
+          </table>
+
+     </div>
+     <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Tutup</button>
+     </div>
+</ng-template>
+
+<ng-template #formKeranjang let-modal>
+     <div class="modal-header">
+          <h1 class="modal-title mt-0">{{ titleCard}}</h1>
+          <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+          </button>
+     </div>
+     <div class="modal-body">
+          <app-keranjang [keranjangId]="modelId" (afterSave)="modal.close()"></app-keranjang>
+
+     </div>
+</ng-template>
+
+
+<ng-template #formTransaksi let-modal>
+     <div class="modal-header">
+          <h1 class="modal-title mt-0">{{ titleCard}}</h1>
+          <button type="button" class="close" (click)="modal.close()" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+          </button>
+     </div>
+     <div class="modal-body">
+          <app-transaksi [keranjangId]="modelId" (afterSave)="modal.close()"></app-transaksi>
+
+     </div>
+</ng-template>

@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<!-- Header-->
+
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+     <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let slider of listSlider; let i = index" [ngClass]="{'active': i==0}">
+               <img src="{{slider.gambar}}" class="d-block w-100" style="max-width: 100%;">
+
+
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+          </a>
+     </div>
+
+</div>
+<!-- Section-->
+
+<h1 class="text-center mt-2 border-top">Menu</h1>
+<div class="container px-4 px-lg-5 mt-5">
+
+     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+          <!-- Loop through each item in listMenu -->
+          <div class="col mb-5" *ngFor="let menu of listMenu">
+               <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{menu.gambar}}" alt="{{menu.nama}}" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                         <div class="text-center">
+                              <!-- Product name-->
+                              <h5 class="fw-bolder">{{menu.nama}}</h5>
+                              <!-- Product price-->
+                              {{menu.harga}}
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+     </div>
+</div>
+
+<h1 class="text-center border-top">Ruangan</h1>
+<div class="container mb-3">
+     <div class="row" *ngFor="let ruangan of listRuangan">
+          <div class="col-md-6 d_flex align-items-center ">
+               <div class="about_content ">
+                    <h2 class="title title_color">{{ ruangan.nama }}</h2>
+                    <p>{{ ruangan.deskripsi }}</p>
+                    <!-- <a href="#" class="button_hover theme_btn_two">Request Custom Price</a> -->
+               </div>
+          </div>
+          <div class="col-md-6">
+               <img class="img-fluid" src="{{ruangan.gambar }}" alt="img">
+          </div>
+     </div>
+</div>
+<!-- Footer-->
+<footer class="border-top p-4" style="background-color: aliceblue;">
+     <div class="copyright text-center text-sm text-muted">
+          All rights reserved. Copyright © 2023 Omah Petoeng by
+          <a href="/" class="text-secondary ms-1" target="_blank">Creative Tim</a>.
+     </div>
+</footer>

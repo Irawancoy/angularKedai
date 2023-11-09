@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-2">
+     <div class="row">
+          <div class="col-lg-12">
+               <div class="card shadow-lg">
+                    <div class="card-header d-flex justify-content-between">
+                         <h1>Daftar Transaksi Masuk</h1>
+                         <div role="group" class="btn-group btn-group-sm btn-group-justified blocks">
+                              <!-- <button type="button" class="btn btn-sm btn-primary mr-2" (click)="createMenu(formMenu)">
+                             <i class="fa fa-plus font-size-14 align-middle mr-1"></i> Tambah Menu
+                         </button> -->
+                              <p>
+                                   <!-- <mat-button-toggle-group appearance="legacy" name="fontStyle"
+                                        aria-label="Font Style">
+                                        <mat-button-toggle value="bold">Bold</mat-button-toggle>
+                                        <mat-button-toggle value="italic">Italic</mat-button-toggle>
+                                        <mat-button-toggle value="underline">Underline</mat-button-toggle>
+                                   </mat-button-toggle-group> -->
+                              </p>
+                         </div>
+                    </div>
+                    <div class="card-body">
+                         <div class="table-responsive">
+                              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                   class="table table-hover">
+                                   <thead class="thead-light">
+                                        <tr>
+                                             <th scope="col">No</th>
+                                             <th scope="col">Nama Customer</th>
+                                             <th scope="col">No HP</th>
+                                             <th scope="col">Email</th>
+                                             <th scope="col">Nama Ruang</th>
+                                             <th scope="col">Tanggal Sewa</th>
+                                             <th scope="col">Tamu</th>
+                                             <th scope="col">Jam Sewa</th>
+                                             <th scope="col">Jenis</th>
+                                             <th scope="col">Status Pembayaran</th>
+                                             <th scope="col">Status Pelunasan</th>
+                                             <th scope="col">Foto KTP
+                                             </th>
+                                             <th scope="col">Harga Total</th>
+                                             <th scope="col">Bayar</th>
+                                             <th scope="col">Kurang</th>
+                                             <!-- <th scope="col">Aksi</th> -->
+
+                                        </tr>
+                                   </thead>
+                                   <tbody>
+                                        <tr *ngFor="let val of dataTransaksi; index as i;">
+                                             <th scope="row">{{i+1}}</th>
+                                             <td class="vertical-middle">{{val.nama_customer}}</td>
+                                             <td class="vertical-middle">{{val.telp_customer}}
+                                                  <span *ngIf="val.telp_customer!=val.telp_customer2">{{
+                                                       val.telp_customer2 }}</span>
+                                             </td>
+                                             <td class="vertical-middle">{{val.email_customer}}</td>
+                                             <td class="vertical-middle">{{val.detail_ruangan[0].nama}}</td>
+                                             <td class="vertical-middle">{{val.tanggal_sewa}}</td>
+                                             <td class="vertical-middle">{{val.tamu}}</td>
+                                             <td class="vertical-middle"> {{val.jam_mulai}} - {{val.jam_selesai }}</td>
+                                             <td class="vertical-middle">{{val.jenis_transaksi}}</td>
+
+                                             <td class="vertical-middle">
+                                                  <mat-slide-toggle [checked]="val.status === 1"
+                                                       [color]="val.status === 1 ? 'primary' : 'warn'"
+                                                       (change)="editTransaksiStatus(val.id_transaksi, $event.checked ? 1 : 0,val.tanggal_sewa)">
+                                                  </mat-slide-toggle>
+                                                  <div class="toggle-text" *ngIf="val.status === 1; else elseBlock">
+                                                       Pembayaran Diterima</div>
+                                                  <ng-template #elseBlock>
+                                                       <div class="toggle-text">Belum Dibayar</div>
+                                                  </ng-template>
+                                             </td>
+                                             <td class="vertical-middle">
+                                                  <mat-slide-toggle [checked]="val.status_pelunasan === 1"
+                                                       [color]="val.status_pelunasan === 1 ? 'primary' : 'warn'"
+                                                       (change)="editTransaksiStatusPelunasan(val.id_transaksi, $event.checked ? 1 : 0,val.tanggal_sewa,val.status)">
+                                                  </mat-slide-toggle>
+                                                  <div class="toggle-text"
+                                                       *ngIf="val.status_pelunasan === 1; else elseBlock2">
+                                                       Lunas</div>
+                                                  <ng-template #elseBlock2>
+                                                       <div class="toggle-text">Belum Lunas</div>
+                                                  </ng-template>
+
+                                             <td>
+                                                  <div style="text-align: center;">
+                                                       <img src="{{val.foto_ktp}}" class="img-thumbnail">
+                                                       <a *ngIf="val.foto_ktp!='http://localhost:8000/assets/img/kosong.jpg'"
+                                                            (click)="downloadKTP(val.foto_ktp)"
+                                                            class="btn btn-sm btn-outline-primary"
+                                                            style="display: block;">lihat
+                                                       </a>
+                                                  </div>
+                                             </td>
+
+
+                                             <td class="vertical-middle">{{val.total|currency:"Rp."}}</td>
+                                             <td class="vertical-middle">{{val.bayar|currency:"Rp."}}</td>
+                                             <td class="vertical-middle">{{val.kurang_bayar|currency:"Rp."}}</td>
+                                             <!-- <td class="vertical-middle text-right">
+                                                  <a (click)="deleteTransaksi(val.id_transaksi)"
+                                                       class="btn btn-sm btn-danger" placement="left" container="body"
+                                                       ngbTooltip="Hapus">
+                                                       <i class="fa fa-trash font-size-14"></i> Hapus
+                                                  </a>
+                                             </td> -->
+                                        </tr>
+                                   </tbody>
+                              </table>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>

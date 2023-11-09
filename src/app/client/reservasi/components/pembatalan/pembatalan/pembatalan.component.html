@@ -1,0 +1,12 @@
+<!-- form Pembatalan -->
+
+<form>
+     <div class="form-group">
+          <label for="keterangan">Alasan Pembatalan</label>
+          <textarea [(ngModel)]="formModel.keterangan" class="form-control" id="keterangan" rows="3"
+               name="keterangan"></textarea>
+     </div>
+
+     <button type="submit" class="btn btn-sm-primary" (click)="postPembatalan()">Submit</button>
+
+</form>

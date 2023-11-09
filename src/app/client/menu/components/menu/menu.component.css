@@ -1,0 +1,40 @@
+.card {
+    height: 400px;
+    /* set height of card */
+}
+
+.card-img-top {
+    height: 200px;
+    /* set height of image */
+    object-fit: cover;
+    /* scale image to fit container */
+}
+
+.card-body {
+    height: 150px;
+    /* set height of body */
+    overflow: hidden;
+    /* hide overflow content */
+}
+
+.card-body p {
+    font-size: 14px;
+    /* set font size of paragraph */
+    line-height: 1.2;
+    /* set line-height of paragraph */
+    margin-bottom: 0;
+    /* remove margin bottom of paragraph */
+}
+
+.btn-group button {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn-group button:focus {
+    outline: none;
+    border-bottom: 2px solid #101010;
+}
