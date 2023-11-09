@@ -4,6 +4,10 @@
 -HALAMAN HOME
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/home.png?raw=true)
 
+-HALAMAN MENU
+![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/menu.png?raw=true)
+
+
 -HALAMAN RUANGAN
 ![alt text](https://github.com/Irawancoy/angularKedai/blob/main/gambar/ruangan.png?raw=true)
 
